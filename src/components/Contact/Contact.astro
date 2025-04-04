@@ -1,0 +1,48 @@
+---
+import Translator from '../system/Translator.astro';
+import ContactForm from '../Contact/ContactForm.jsx';
+const { lang } = Astro.params;
+---
+
+<section id="contact">
+  <div class="inner">
+    <section>
+      <ContactForm lang={lang} client:idle />
+    </section>
+    <section class="split">
+      <section>
+        <div class="contact-method">
+          <span class="icon solid alt fa-envelope"></span>
+          <h3>Email</h3>
+          <a href="mailto:info@aimtrainingcenter.com">
+            info@aimtrainingcenter.com
+          </a>
+        </div>
+      </section>
+      <section>
+        <div class="contact-method">
+          <span class="icon solid alt fa-phone"></span>
+          <h3>
+            <Translator name="contact.phone" />
+          </h3>
+          <a href="tel: +34 615 37 70 46">+34 615 37 70 46</a>
+        </div>
+      </section>
+      <section>
+        <div class="contact-method">
+          <span class="icon solid alt fa-home"></span>
+          <h3>
+            <Translator name="contact.address" />
+          </h3>
+          <span>
+            C/ Pujades 236 – Bajos 1
+            <br />
+            Metro Poblenou
+            <br />
+            (08005) Barcelona
+          </span>
+        </div>
+      </section>
+    </section>
+  </div>
+</section>

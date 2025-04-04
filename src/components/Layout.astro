@@ -1,0 +1,198 @@
+---
+import '../styles/global.css';
+import BaseHead from '../components/BaseHead.astro';
+import Translator from '../components/system/Translator.astro';
+import Contact from '../components/Contact/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { getLangT } from '../lib/getLangT';
+const { lang } = Astro.props;
+const t = await getLangT(lang);
+const showES = lang !== 'es';
+const showEN = lang !== 'en';
+const showCAT = lang !== 'cat';
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead />
+  </head>
+  <body>
+    <div class="upper-layer">
+      <div id="wrapper">
+        <header id="header">
+          <nav>
+            <a
+              class="logo border-b-0 w-16 sm:w-24 md:w-28 pt-1.5 md:pt-1 ps-2 sm:ps-8"
+              href={`/${lang}/`}
+            >
+              <picture>
+                <source src="/images/Logo_AIM.webp" type="image/webp" />
+                <img src="/images/Logo_AIM.jpg" />
+              </picture>
+            </a>
+            <div>
+              <ul
+                class="list-none flex absolute right-16 sm:right-20 md:right-28"
+              >
+                {
+                  showES && (
+                    <li class="lang-menu-item px-0.5 sm:px-3">
+                      <a href="/es/" class="border-b-0">
+                        ES
+                      </a>
+                    </li>
+                  )
+                }
+                {
+                  showEN && (
+                    <li class="lang-menu-item px-0.5 sm:px-3">
+                      <a href="/en/" class="border-b-0">
+                        EN
+                      </a>
+                    </li>
+                  )
+                }
+                {
+                  showCAT && (
+                    <li class="lang-menu-item px-0.5 sm:px-3">
+                      <a href="/cat/" class="border-b-0">
+                        CAT
+                      </a>
+                    </li>
+                  )
+                }
+              </ul>
+              <span id="open-menu"></span>
+            </div>
+          </nav>
+        </header>
+        <slot />
+        <Contact />
+        <Footer />
+        <a
+          href={`https://wa.me/615377046`}
+          target="_blank"
+          rel="noopener noreferrer"
+          title={t['menu.contact']}
+          id="whatsapp"
+          class="icon brands fa-whatsapp bottom-4 right-4 rounded-full shadow-lg z-10"
+        >
+        </a>
+      </div>
+      <nav id="menu">
+        <div class="inner">
+          <ul class="links">
+            <li>
+              <a href={`/${lang}/`}><Translator name="menu.home" /></a>
+            </li>
+            <li>
+              <a href={`/${lang}#concept`}><Translator name="menu.concept" /></a
+              >
+            </li>
+            <li>
+              <a
+                class="w-full uppercase mb-2"
+                href={`/${lang}/${t['section.services.to']}`}
+                ><Translator name="menu.services" /></a
+              >
+            </li>
+            <li>
+              <a
+                class="w-full uppercase mb-2"
+                href={`/${lang}/${t['section.facilities.to']}`}
+                ><Translator name="menu.facilities" /></a
+              >
+            </li>
+            <li>
+              <a
+                class="w-full uppercase mb-2"
+                href={`/${lang}/${t['section.aboutMe.to']}`}
+                ><Translator name="menu.about.me" /></a
+              >
+            </li>
+            <li>
+              <a href={`/${lang}#contact`}
+                ><Translator name="menu.contact" />
+              </a>
+            </li>
+          </ul>
+        </div>
+        <a id="close-menu" class="close">
+          <Translator name="menu.close" />
+        </a>
+      </nav>
+    </div>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .logo {
+    @media screen and (min-width: 1680px) {
+      padding-top: 1rem;
+    }
+  }
+
+  .lang-menu-item {
+    font-size: 0.85rem;
+  }
+
+  #menu ul li a {
+    border: 0;
+    border-top: solid 1px rgba(212, 212, 255, 0.1);
+    display: block;
+    font-size: 0.8em;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    line-height: 4em;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    transition:
+      color 0.2s ease-in-out,
+      border-bottom-color 0.2s ease-in-out;
+  }
+
+  #menu ul li a:hover {
+    color: #d4ffc4 !important;
+  }
+
+  #whatsapp {
+    position: fixed;
+    background-color: #25d366;
+    font-size: 28px;
+    &::before {
+      height: 2em;
+      line-height: 2em;
+      text-align: center;
+      width: 2em;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Reset scroll on navigation
+  addEventListener('astro:after-swap', () => {
+    window.scrollTo(0, 0);
+  });
+
+  document.getElementById('open-menu')?.addEventListener('click', () => {
+    document.querySelector('.upper-layer')?.classList.add('is-menu-visible');
+  });
+
+  document.getElementById('close-menu')?.addEventListener('click', () => {
+    document.querySelector('.upper-layer')?.classList.remove('is-menu-visible');
+  });
+
+  // Control clase del menú
+  document.addEventListener('menu:open', () => {
+    document.querySelector('.upper-layer')?.classList.add('is-menu-visible');
+  });
+</script>

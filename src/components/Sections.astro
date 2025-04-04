@@ -1,0 +1,119 @@
+---
+import Translator from './system/Translator.astro';
+const articles = [
+  {
+    description: 'landing.text1',
+    image: 'image1',
+  },
+  {
+    description: 'landing.text2',
+    image: 'image2',
+  },
+  {
+    description: 'landing.text3',
+    image: 'image3',
+  },
+  {
+    description: 'landing.text4',
+    image: 'image4',
+  },
+];
+---
+
+<section class="flex flex-col items-center py-5">
+  {
+    articles.map((a) => (
+      <article class="flex sm:flex-row flex-col m-4 pb-5 lg:max-w-4xl xl:max-w-6xl gap-10">
+        <div class="data sm:w-3/6 flex flex-col justify-center text-gray-700">
+          <Translator name={a.description} />
+        </div>
+        <picture class="bg-center bg-no-repeat bg-cover sm:w-3/6">
+          <source
+            srcset={`/images/landing/${a.image}.webp`}
+            type="image/webp"
+          />
+          <img src={`/images/landing/${a.image}.jpg`} />
+        </picture>
+      </article>
+    ))
+  }
+</section>
+<div class="wrapper">
+  <section class="top"></section>
+  <section>
+    <div class="section-content">
+      <picture>
+        <source srcset="/images/Logo_AIM.webp" type="image/webp" />
+        <img src="/images/Logo_AIM.jpg" />
+      </picture>
+    </div>
+    <div class="section-mask"></div>
+  </section>
+  <section class="bottom"></section>
+</div>
+
+<style>
+  .wrapper {
+    section {
+      min-height: 340px;
+      position: relative;
+      text-align: center;
+
+      .section-content {
+        width: 100%;
+        position: relative;
+        top: -55px;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        picture {
+          max-width: 200px;
+        }
+      }
+      .section-mask {
+        position: absolute;
+        min-height: 293px;
+        top: -145px;
+
+        /* min-height: 450px;
+      position: absolute;
+      top: -170px;
+      bottom: 170px; */
+        right: 0;
+        left: 0;
+        z-index: 1;
+        background-color: #000000;
+        background-size: cover !important;
+        transform: skewY(10deg);
+      }
+
+      h1 {
+        margin-bottom: 0;
+      }
+    }
+    .top {
+      min-height: 340px;
+    }
+    .main {
+      min-height: 450px;
+      background-color: #ececec;
+    }
+    .bottom {
+      min-height: 0;
+      background-color: red;
+    }
+    .has-parallax {
+      background-attachment: fixed !important;
+    }
+  }
+
+  .data {
+    @media screen and (min-width: 710px) {
+      font-size: 1.2rem;
+    }
+    @media screen and (min-width: 1280px) {
+      font-size: 1.875rem;
+      line-height: 3.5rem;
+    }
+  }
+</style>

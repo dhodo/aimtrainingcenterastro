@@ -1,0 +1,29 @@
+---
+import Translator from './system/Translator.astro';
+---
+
+<section id="banner" class="major">
+  <div class="inner">
+    <header class="major">
+      <h1></h1>
+    </header>
+    <div class="content max-w-2xl">
+      <p>
+        <Translator name="landing.cover.text" />
+      </p>
+    </div>
+  </div>
+</section>
+<style>
+  section {
+    background-image: url('/images/landing/cover.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  @supports (background-image: url('image.webp')) {
+    section {
+      background-image: url('/images/landing/cover.webp');
+    }
+  }
+</style>
