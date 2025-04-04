@@ -1,0 +1,12 @@
+---
+export const prerender = false;
+
+if (import.meta.env.SSR) {
+  return new Response(null, {
+    status: 302,
+    headers: {
+      Location: '/es/',
+    },
+  });
+}
+---

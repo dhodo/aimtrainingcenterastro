@@ -1,0 +1,16 @@
+---
+import { Image } from '@astrojs/image/components';
+
+const { src, alt, width, height, format = 'webp', class: className = '' } = Astro.props;
+const isDev = import.meta.env.DEV;
+---
+
+<Image
+  src={src}
+  alt={alt}
+  width={width}
+  height={height}
+  format={format}
+  class={className}
+  static={isDev}
+/>
