@@ -20,30 +20,6 @@
 			"dest": "_render"
 		},
 		{
-			"src": "^/cat/serveis/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/cat/sobre-mi/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/en/about-me/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/en/services/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/es/servicios/?$",
-			"dest": "_render"
-		},
-		{
-			"src": "^/es/sobre-mi/?$",
-			"dest": "_render"
-		},
-		{
 			"src": "^/$",
 			"dest": "_render"
 		}
