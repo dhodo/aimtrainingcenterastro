@@ -7,6 +7,7 @@ import Footer from '../components/Footer.astro';
 import { getLangT } from '../lib/getLangT';
 const { lang } = Astro.props;
 const t = await getLangT(lang);
+import logo from '../assets/images/Logo_AIM.jpg';
 const showES = lang !== 'es';
 const showEN = lang !== 'en';
 const showCAT = lang !== 'cat';
@@ -26,10 +27,12 @@ const showCAT = lang !== 'cat';
               class="logo border-b-0 w-16 sm:w-24 md:w-28 pt-1.5 md:pt-1 ps-2 sm:ps-8"
               href={`/${lang}/`}
             >
-              <picture>
-                <source src="/images/Logo_AIM.webp" type="image/webp" />
-                <img src="/images/Logo_AIM.jpg" />
-              </picture>
+              <img
+                src={logo.src}
+                alt="Logo"
+                width={80}
+                height={45}
+              />
             </a>
             <div>
               <ul

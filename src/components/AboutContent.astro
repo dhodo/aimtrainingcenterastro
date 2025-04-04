@@ -1,7 +1,5 @@
 ---
 import Translator from './system/Translator.astro';
-// import ImageWrapper from '../components/system/ImageWrapper.astro';
-import { Image } from 'astro:assets';
 import about2 from '../assets/images/about2.jpg';
 ---
 
@@ -34,20 +32,13 @@ import about2 from '../assets/images/about2.jpg';
         </p>
       </div>
       <div class="w-full lg:w-1/3">
-        <Image
-          src={about2}
+        <img
+          src={about2.src}
           alt="Germán López Pereira - Entrenador personal"
           width={491}
           height={661}
           class="mx-auto"
         />
-        <!-- <ImageWrapper
-          src={about2}
-          alt="Germán López Pereira - Entrenador personal"
-          width={491}
-          height={661}
-          class="mx-auto"
-        /> -->
       </div>
     </div>
   </div>

@@ -1,5 +1,17 @@
 ---
 import Translator from './system/Translator.astro';
+import logo from '../assets/images/Logo_AIM.jpg';
+import image1 from '../assets/images/landing/image1.jpg';
+import image2 from '../assets/images/landing/image2.jpg';
+import image3 from '../assets/images/landing/image3.jpg';
+import image4 from '../assets/images/landing/image4.jpg';
+
+const images = {
+  image1,
+  image2,
+  image3,
+  image4,
+};
 const articles = [
   {
     description: 'landing.text1',
@@ -22,30 +34,34 @@ const articles = [
 
 <section class="flex flex-col items-center py-5">
   {
-    articles.map((a) => (
-      <article class="flex sm:flex-row flex-col m-4 pb-5 lg:max-w-4xl xl:max-w-6xl gap-10">
-        <div class="data sm:w-3/6 flex flex-col justify-center text-gray-700">
-          <Translator name={a.description} />
-        </div>
-        <picture class="bg-center bg-no-repeat bg-cover sm:w-3/6">
-          <source
-            srcset={`/images/landing/${a.image}.webp`}
-            type="image/webp"
-          />
-          <img src={`/images/landing/${a.image}.jpg`} />
-        </picture>
-      </article>
-    ))
+    articles.map((a) => {
+      const img = images[a.image];
+      return (
+        <article class="flex sm:flex-row flex-col m-4 pb-5 lg:max-w-4xl xl:max-w-6xl gap-10">
+          <div class="data sm:w-3/6 flex flex-col justify-center text-gray-700">
+            <Translator name={a.description} />
+          </div>
+
+          {img && (
+            <img
+              src={img.src}
+              alt={a.description}
+              width={img.width}
+              height={img.height}
+              loading="lazy"
+              class="sm:w-3/6 object-cover"
+            />
+          )}
+        </article>
+      );
+    })
   }
 </section>
 <div class="wrapper">
   <section class="top"></section>
   <section>
     <div class="section-content">
-      <picture>
-        <source srcset="/images/Logo_AIM.webp" type="image/webp" />
-        <img src="/images/Logo_AIM.jpg" />
-      </picture>
+      <img src={logo.src} alt="Logo" width={200} height={112} />
     </div>
     <div class="section-mask"></div>
   </section>
@@ -66,9 +82,6 @@ const articles = [
         z-index: 2;
         display: flex;
         justify-content: center;
-        picture {
-          max-width: 200px;
-        }
       }
       .section-mask {
         position: absolute;

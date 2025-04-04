@@ -1,5 +1,7 @@
 ---
 import Translator from '../components/system/Translator.astro';
+import star from '../assets/images/services/star-fill.svg';
+import image2 from '../assets/images/landing/image2.jpg';
 ---
 
 <section id="main" class="page">
@@ -27,11 +29,7 @@ import Translator from '../components/system/Translator.astro';
           </ul>
           <h3 class="flex mt-16 mb-0">
             <Translator name="section.services.personal.duo.training.title" />
-            <img
-              src="/images/services/star-fill.svg"
-              alt="Star"
-              class="inline-block ms-2"
-            />
+            <img src={star.src} alt="Star" width={32} height={50} class="inline-block ms-2" />
           </h3>
           <div class="mb-[1em]">
             <Translator name="section.services.personal.duo.training.text4" />
@@ -119,10 +117,7 @@ import Translator from '../components/system/Translator.astro';
           <div><Translator name="section.services.description", isHtml /></div>
         </div>
         <div class="w-0 lg:w-1/2">
-          <picture>
-            <source src="/images/landing/image2.webp" type="image/webp" />
-            <img src="/images/landing/image2.jpg" class="mx-auto" />
-          </picture>
+            <img src={image2.src} alt="Servicios" width={600} height={450} class="mx-auto" />
         </div>
       </div>
     </div>
