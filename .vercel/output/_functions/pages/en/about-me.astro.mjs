@@ -1,7 +1,7 @@
-import { c as createComponent, r as renderComponent, a as renderTemplate } from '../../chunks/astro/server_BA1NGprv.mjs';
+import { c as createComponent, r as renderComponent, a as renderTemplate } from '../../chunks/astro/server_Cd2soTqW.mjs';
 import 'kleur/colors';
-import { $ as $$AboutContent } from '../../chunks/AboutContent_CbpbFvud.mjs';
-import { a as $$Layout } from '../../chunks/Layout_OpGEQjAR.mjs';
+import { $ as $$AboutContent } from '../../chunks/AboutContent_BODJLla9.mjs';
+import { a as $$Layout } from '../../chunks/Layout_BeBuJa6y.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const $$AboutMe = createComponent(($$result, $$props, $$slots) => {

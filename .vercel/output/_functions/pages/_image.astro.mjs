@@ -1,6 +1,6 @@
-import mime from 'mime';
-import squoosh_default from '../chunks/squoosh_C5OLJMmp.mjs';
-import { i as isRemoteImage } from '../chunks/index_CBBZdq6F.mjs';
+import { g as getConfiguredImageService, i as imageConfig, a as isRemoteAllowed } from '../chunks/_astro_assets_CLHvj6jC.mjs';
+import { i as isRemotePath } from '../chunks/path_BuZodYwm.mjs';
+import * as mime from 'mrmime';
 export { renderers } from '../renderers.mjs';
 
 const fnv1a52 = (str) => {
@@ -28,47 +28,64 @@ const etag = (payload, weak = false) => {
   return prefix + fnv1a52(payload).toString(36) + payload.length.toString(36) + '"';
 };
 
-async function loadRemoteImage(src) {
+async function loadRemoteImage(src, headers) {
   try {
-    const res = await fetch(src);
+    const res = await fetch(src, {
+      // Forward all headers from the original request
+      headers
+    });
     if (!res.ok) {
       return void 0;
     }
-    return Buffer.from(await res.arrayBuffer());
-  } catch (err) {
-    console.error(err);
+    return await res.arrayBuffer();
+  } catch {
     return void 0;
   }
 }
-const get = async ({ request }) => {
+const GET = async ({ request }) => {
   try {
+    const imageService = await getConfiguredImageService();
+    if (!("transform" in imageService)) {
+      throw new Error("Configured image service is not a local service");
+    }
     const url = new URL(request.url);
-    const transform = squoosh_default.parseTransform(url.searchParams);
+    const transform = await imageService.parseURL(url, imageConfig);
+    if (!transform?.src) {
+      throw new Error("Incorrect transform returned by `parseURL`");
+    }
     let inputBuffer = void 0;
-    const sourceUrl = isRemoteImage(transform.src) ? new URL(transform.src) : new URL(transform.src, url.origin);
-    inputBuffer = await loadRemoteImage(sourceUrl);
+    const isRemoteImage = isRemotePath(transform.src);
+    const sourceUrl = isRemoteImage ? new URL(transform.src) : new URL(transform.src, url.origin);
+    if (isRemoteImage && isRemoteAllowed(transform.src, imageConfig) === false) {
+      return new Response("Forbidden", { status: 403 });
+    }
+    inputBuffer = await loadRemoteImage(sourceUrl, isRemoteImage ? new Headers() : request.headers);
     if (!inputBuffer) {
       return new Response("Not Found", { status: 404 });
     }
-    const { data, format } = await squoosh_default.transform(inputBuffer, transform);
+    const { data, format } = await imageService.transform(
+      new Uint8Array(inputBuffer),
+      transform,
+      imageConfig
+    );
     return new Response(data, {
       status: 200,
       headers: {
-        "Content-Type": mime.getType(format) || "",
+        "Content-Type": mime.lookup(format) ?? `image/${format}`,
         "Cache-Control": "public, max-age=31536000",
         ETag: etag(data.toString()),
         Date: (/* @__PURE__ */ new Date()).toUTCString()
       }
     });
   } catch (err) {
-    console.error(err);
+    console.error("Could not process image request:", err);
     return new Response(`Server Error: ${err}`, { status: 500 });
   }
 };
 
 const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
-  get
+  GET
 }, Symbol.toStringTag, { value: 'Module' }));
 
 const page = () => _page;
