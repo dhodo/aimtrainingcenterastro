@@ -7,6 +7,7 @@ import { getLangT } from '../lib/getLangT';
 const { lang } = Astro.props;
 const t = await getLangT(lang);
 import logo from '../assets/images/Logo_AIM.jpg';
+import BaseHead from './BaseHead.astro';
 const showES = lang !== 'es';
 const showEN = lang !== 'en';
 const showCAT = lang !== 'cat';
@@ -15,6 +16,7 @@ const showCAT = lang !== 'cat';
 <!doctype html>
 <html lang={lang}>
   <head>
+    <BaseHead />
   </head>
   <body>
     <div class="upper-layer">

@@ -113,6 +113,7 @@ export default function ContactForm({ lang }) {
                 </label>
                 <Field
                     type="text"
+                    id="name"
                     name="name"
                     className={errors?.name ? 'error-input' : ''}
                 />
@@ -126,6 +127,7 @@ export default function ContactForm({ lang }) {
                 <label htmlFor="email">Email</label>
                 <Field
                     type="text"
+                    id="email"
                     name="email"
                     className={errors?.email ? 'error-input' : ''}
                 />
@@ -142,6 +144,7 @@ export default function ContactForm({ lang }) {
                 </label>
                 <Field
                     as="textarea"
+                    id="message"
                     name="message"
                     rows="6"
                     className={errors?.message ? 'error-input' : ''}

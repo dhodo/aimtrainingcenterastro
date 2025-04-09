@@ -1,0 +1,13 @@
+---
+import Translator from "../system/Translator.astro";
+import FacilitiesGallery from "./FacilitiesGallery";
+---
+
+<section id="main" class="page">
+    <div id="one" class="inner">
+      <header class="major">
+        <h1><Translator name="section.facilities.title" /></h1>
+      </header>
+    </div>
+    <FacilitiesGallery client:only />
+  </section>

@@ -1,0 +1,12 @@
+# Permitir todo a todos los bots
+User-agent: *
+
+# Bloquear archivos técnicos innecesarios
+Disallow: /404
+Disallow: /500
+
+# Permitir el resto del contenido
+Allow: /
+
+# Ruta al sitemap (ajusta si cambia la URL base)
+Sitemap: https://aimtrainingcenter.rodrigotoledo.es/sitemap-index.xml

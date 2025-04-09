@@ -1,18 +1,19 @@
 ---
 import Translator from '../system/Translator.astro';
-// import ContactForm from './ContactForm';
+import ContactForm from './ContactForm';
+const { lang } = Astro.props;
 ---
 
 <section id="contact">
   <div class="inner">
     <section>
-      <!-- <ContactForm /> -->
+      <ContactForm lang={lang} client:only />
     </section>
     <section class="split">
       <section>
         <div class="contact-method">
           <span class="icon solid alt fa-envelope"></span>
-          <h3>Email</h3>
+          <h1>Email</h1>
           <a href="mailto:info@aimtrainingcenter.com">
             info@aimtrainingcenter.com
           </a>
@@ -21,18 +22,18 @@ import Translator from '../system/Translator.astro';
       <section>
         <div class="contact-method">
           <span class="icon solid alt fa-phone"></span>
-          <h3>
+          <h1>
             <Translator name="contact.phone" />
-          </h3>
+          </h1>
           <a href="tel: +34 615 37 70 46">+34 615 37 70 46</a>
         </div>
       </section>
       <section>
         <div class="contact-method">
           <span class="icon solid alt fa-home"></span>
-          <h3>
+          <h1>
             <Translator name="contact.address" />
-          </h3>
+          </h1>
           <span>
             C/ Pujades 236 – Bajos 1
             <br />

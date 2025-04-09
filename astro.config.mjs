@@ -1,18 +1,9 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  integrations: [react()],
+  site: 'https://aimtrainingcenter.rodrigotoledo.es',
+  integrations: [react(), sitemap()],
   output: 'static',
 });
-
-
-// import { defineConfig } from 'astro/config';
-// import react from '@astrojs/react';
-// import vercel from '@astrojs/vercel/serverless';
-
-// export default defineConfig({
-//   integrations: [react()],
-//   output: 'server',
-//   adapter: vercel(),
-// });
