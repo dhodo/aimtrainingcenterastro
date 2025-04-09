@@ -2,6 +2,7 @@
 import { getTranslations } from '../../lib/i18n.js';
 
 const pathname = Astro.url.pathname;
+// const { lang } = Astro.params;
 const lang = pathname.split('/')[1] || 'es';
 
 const { name, variables = {}, isHtml = false,  } = Astro.props;
