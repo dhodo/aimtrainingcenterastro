@@ -7,7 +7,7 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteBase /
 
 # Solo si estamos en la raíz (evita bucles)
-RewriteCond %{REQUEST_URI} ^/aimtrainingcenterastro/?$ [NC]
+RewriteCond %{REQUEST_URI} ^/aimtrainingcenter/?$ [NC]
 
 # Detectar idioma preferido del navegador y redirigir
 RewriteCond %{HTTP:Accept-Language} ^es [NC]
